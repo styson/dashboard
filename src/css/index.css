@@ -10,3 +10,8 @@ body {
 .chart {
   height: 200px;
 }
+
+textarea {
+  min-height: 100px;
+  width: 100%;
+}

@@ -1,10 +1,9 @@
 import { ResponsiveBar } from '@nivo/bar'
 import React from 'react'
 
-// make sure parent container has a defined height when using responsive component, otherwise height will be 0 and no chart will be rendered.
 export default function BarChart ({ data }) {
   return (
-    <div class='chart'>
+    <div className='chart'>
     <ResponsiveBar
       data={data}
       keys={[ 'open', 'closed' ]}
@@ -35,20 +34,6 @@ export default function BarChart ({ data }) {
             spacing: 10
         }
       ]}
-      // fill={[
-      //   {
-      //       match: {
-      //           id: 'fries'
-      //       },
-      //       id: 'dots'
-      //   },
-      //   {
-      //       match: {
-      //           id: 'lines'
-      //       },
-      //       id: 'lines'
-      //   }
-      // ]}
       borderColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
       axisTop={null}
       axisRight={null}

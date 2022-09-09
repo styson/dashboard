@@ -1,9 +1,9 @@
-import { LinkContainer } from "react-router-bootstrap";
 import { Badge, Button, Card, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { request } from "@octokit/request";
-import requestDefaults from "../config/repo";
-import React from "react";
 import BarChart from "./barChart";
+import React from "react";
+import requestDefaults from "../config/repo";
 
 requestDefaults.headers.authorization = `token ${process.env.REACT_APP_API_TOKEN}`;
 
@@ -24,6 +24,22 @@ export default function Milestones() {
     }
     getMilestones();
   }, []);
+
+  function LinkToMilestone({ data }) {
+    const navigate = useNavigate();
+    function handleClick() {
+      navigate('/milestone', { state: { title: data.title, number: data.number } });
+    }
+
+    return (
+      <Button
+        className="btn-sm btn-success float-end"
+        onClick={handleClick}
+      >
+        Details
+      </Button>
+    );
+  }
 
   return (
     <>
@@ -52,18 +68,7 @@ export default function Milestones() {
                 {m.description}
               </Card.Text>
               <BarChart data={data} />
-              <LinkContainer
-                key={i}
-                to={{
-                  pathname: "/milestone",
-                  state: [{
-                    number: m.number,
-                    title: m.title,
-                  }],
-                }}
-              >
-                <Button className="btn-sm btn-success float-end">Details</Button>
-              </LinkContainer>
+              <LinkToMilestone data={m} />
             </Card.Body>
           </Card>
         </Col>
